@@ -26,11 +26,16 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* playerMesh;
+	UStaticMeshComponent* Ball;
+	/*UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* Hamster;*/
+
 	UPROPERTY(VisibleAnywhere)
 	FVector CurrentVelocity;
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float moveSpeed = 100;
+	float moveSpeed = 20000;
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float jumpSpeed = 25000;
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float rotationSpeed = 100;
 	UPROPERTY(VisibleAnywhere, Category = "Movement")

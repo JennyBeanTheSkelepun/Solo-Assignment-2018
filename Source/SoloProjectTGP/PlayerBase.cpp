@@ -9,8 +9,9 @@ APlayerBase::APlayerBase()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	playerMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Temporary Mesh"));
-	RootComponent = playerMesh;
+	Ball = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Glass Ball"));
+	Ball->SetSimulatePhysics(true);
+	RootComponent = Ball;
 
 }
 
@@ -28,8 +29,9 @@ void APlayerBase::Tick(float DeltaTime)
 
 	if (!CurrentVelocity.IsZero())
 	{
-		FVector NewLocation = GetActorLocation() + (CurrentVelocity * DeltaTime);
-		SetActorLocation(NewLocation);
+		//FVector NewLocation = GetActorLocation() + (CurrentVelocity * DeltaTime);
+		//SetActorLocation(NewLocation);
+		Ball->AddForce(CurrentVelocity);
 	}
 	if (!rotationVelocity != 0)
 	{
@@ -66,5 +68,5 @@ void APlayerBase::LookRight(float value)
 
 void APlayerBase::Jump(float value)
 {
-	
+	CurrentVelocity.Z = value * moveSpeed;
 }
