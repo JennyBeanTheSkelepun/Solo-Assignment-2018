@@ -1,13 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "PlayerBase.h"
-
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values
 APlayerBase::APlayerBase()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	playerMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Temporary Mesh"));
+	RootComponent = playerMesh;
 
 }
 
@@ -23,6 +26,16 @@ void APlayerBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (!CurrentVelocity.IsZero())
+	{
+		FVector NewLocation = GetActorLocation() + (CurrentVelocity * DeltaTime);
+		SetActorLocation(NewLocation);
+	}
+	if (!rotationVelocity != 0)
+	{
+		FRotator NewRotation{ 0,rotationVelocity * DeltaTime, 0 };
+		RootComponent->AddWorldRotation(NewRotation);
+	}
 }
 
 // Called to bind functionality to input
@@ -30,5 +43,28 @@ void APlayerBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAxis("MoveForward", this, &APlayerBase::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &APlayerBase::MoveRight);
+	PlayerInputComponent->BindAxis("LookRight", this, &APlayerBase::LookRight);
+	PlayerInputComponent->BindAxis("Jump", this, &APlayerBase::Jump);
 }
 
+void APlayerBase::MoveForward(float value)
+{
+	CurrentVelocity.X = value * moveSpeed;
+}
+
+void APlayerBase::MoveRight(float value)
+{
+	CurrentVelocity.Y = value * moveSpeed;
+}
+
+void APlayerBase::LookRight(float value)
+{
+	rotationVelocity = value * rotationSpeed;
+}
+
+void APlayerBase::Jump(float value)
+{
+	
+}

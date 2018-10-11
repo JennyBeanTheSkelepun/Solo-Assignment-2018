@@ -4,7 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
 #include "PlayerBase.generated.h"
+
+
+class StaticMeshComponent;
 
 UCLASS()
 class SOLOPROJECTTGP_API APlayerBase : public APawn
@@ -19,6 +25,17 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* playerMesh;
+	UPROPERTY(VisibleAnywhere)
+	FVector CurrentVelocity;
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float moveSpeed = 100;
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float rotationSpeed = 100;
+	UPROPERTY(VisibleAnywhere, Category = "Movement")
+	float rotationVelocity;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -26,6 +43,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
-	
+	virtual void MoveForward(float value);
+	virtual void MoveRight(float value);
+	virtual void LookRight(float value);
+	virtual void Jump(float value);
 };
