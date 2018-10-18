@@ -35,7 +35,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float moveSpeed = 20000;
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float jumpSpeed = 25000;
+	float jumpSpeed = 50000;
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float rotationSpeed = 100;
 	UPROPERTY(VisibleAnywhere, Category = "Movement")

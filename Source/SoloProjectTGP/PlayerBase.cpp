@@ -68,5 +68,5 @@ void APlayerBase::LookRight(float value)
 
 void APlayerBase::Jump(float value)
 {
-	CurrentVelocity.Z = value * moveSpeed;
+	CurrentVelocity.Z = value * jumpSpeed;
 }
