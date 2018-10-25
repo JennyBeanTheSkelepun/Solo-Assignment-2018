@@ -3,6 +3,7 @@
 #include "PlayerBase.h"
 #include "Components/StaticMeshComponent.h"
 
+
 // Sets default values
 APlayerBase::APlayerBase()
 {
@@ -12,6 +13,8 @@ APlayerBase::APlayerBase()
 	Ball = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Glass Ball"));
 	Ball->SetSimulatePhysics(true);
 	RootComponent = Ball;
+
+	StartPosition = FVector(-100, -50, 2070);
 
 }
 
@@ -38,6 +41,10 @@ void APlayerBase::Tick(float DeltaTime)
 		FRotator NewRotation{ 0,rotationVelocity * DeltaTime, 0 };
 		RootComponent->AddWorldRotation(NewRotation);
 	}
+	/*if (GetActorLocation().Z <= 0.0f)
+	{
+		SetActorLocation(StartPosition);
+	}*/
 }
 
 // Called to bind functionality to input

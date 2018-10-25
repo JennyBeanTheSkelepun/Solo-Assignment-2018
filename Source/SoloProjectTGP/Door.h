@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Components/StaticMeshComponent.h"
 #include "Door.generated.h"
+
 
 UCLASS()
 class SOLOPROJECTTGP_API ADoor : public APawn
@@ -18,6 +20,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(VisibleAnywhere)
+		UStaticMeshComponent* doorComponent;
 
 public:	
 	// Called every frame

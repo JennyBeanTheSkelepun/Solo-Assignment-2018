@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine.h"
 #include "GameFramework/Pawn.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -32,6 +33,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	FVector CurrentVelocity;
+	UPROPERTY(EditAnywhere)
+	FVector StartPosition;
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float moveSpeed = 20000;
 	UPROPERTY(EditAnywhere, Category = "Movement")
